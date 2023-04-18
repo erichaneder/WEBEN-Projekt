@@ -1,9 +1,130 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" src="../res/css/style.css">
-        <script src="../js/script.js"></script>
-    </head>
-    <body>
-        Hello World
-    </body>
+<head>
+	<title>Das Fechtoutlet</title>
+    <meta name="description" content="Das Fechtoutlet">
+    <meta name="keywords" content="Das Fechtoutlet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="../res/css/style.css">
+    <script src="../js/script.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Das Fechtoutlet</h1>
+	</header>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">FECHTOUTLET</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact Us</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+                <a class="nav-link py-3 px-0 px-lg-2" href="register.html">REGISTER</a>
+            </li>
+            <li class="nav-item col-6 col-lg-auto">
+                  <a class="nav-link py-3 px-0 px-lg-2" href="login.html">LOGIN</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+	<div class="container my-4">
+		<h2>Willkommen im Fechtoutlet</h2>
+		<p>Dein Fechtshop für hochwertiges Equipment und Zubehör. Hier findest du alles, was du für dein nächstes Gefecht brauchst.</p>
+	</div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-3 hover m-auto" onclick="selectProduct()">
+                <a href="product.html" class="product-image">
+                    <img src="../res/img/fechthelm.png" style="max-height: 100px;">
+                </a>
+                <h4>Fechthelm</h2>
+                <p> Die Fechtmaske schützt den Kopf und das Gesicht des Fechters vor Verletzungen.</p>
+            </div>
+            <div class="col-md-3 hover m-auto">
+                <a href="product.html">
+                    <img src="../res/img/fechtjacke1.png" style="max-height: 100px;">
+                </a>
+                <h4>Fechtjacke</h2>
+                <p>Die Fechtjacke ist eine spezielle Schutzbekleidung für Fechter.</p>
+            </div>
+            <div class="col-md-3 hover m-auto">
+                <a href="product.html">
+                    <img src="../res/img/fechthose1.png" style="max-height: 100px;">
+                </a>
+                <h4>Fechthose</h2>
+                <p> Die Fechthose ist eine spezielle Hose, die den Fechter vor Verletzungen schützt und Bewegungsfreiheit gewährleistet.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3 hover m-auto">
+                <a href="product.html">
+                    <img src="../res/img/saebel1.png" style="max-height: 100px;">
+                </a>
+                <h4>Fechtsäbel</h2>
+                <p>Der Säbel ist eine Fechtwaffe mit gebogener Klinge und scharfer Schneide.</p>
+            </div>
+            <div class="col-md-3 hover m-auto">
+                <a href="product.html">
+                    <img src="../res/img/schaumstoff1.png" style="max-height: 100px;">
+                </a>
+                <h4>Schaumstoff-Säbel</h2>
+                <p>Der Schaumstoff-Säbel ist eine sichere und spaßige Alternative zum klassischen Fechtsäbel.</p>
+            </div>
+            <div class="col-md-3 hover m-auto">
+                <a href="product.html">
+                    <img src="../res/img/shirt1.png" style="max-height: 100px;">
+                </a>
+                <h4>Funktionsshirt</h2>
+                <p>Das atmungsaktive Funktionsshirt sorgt durch seine hohe Funktionalität für ein angenehmes Tragegefühl.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3 hover m-auto">
+                <a href="product.html">
+                    <img src="../res/img/handschuh1.png" style="max-height: 100px;">
+                </a>
+                <h4>Handschuhe</h2>
+                <p>Fechthandschuhe schützen deine Hände vor Verletzungen und bieten ein besseres Griffgefühl.</p>
+            </div>
+            <div class="col-md-3 hover m-auto">
+                <a href="product.html">
+                    <img src="../res/img/socken1.png" style="max-height: 100px;">
+                </a>
+                <h4>Fechtsocken</h2>
+                <p>Fechtsocken sind spezielle Socken, die einen sicheren Halt im Fechtschuh gewährleisten.</p>
+            </div>
+            <div class="col-md-3 hover m-auto">
+                <a href="product.html">
+                    <img src="../res/img/tasche1.png" style="max-height: 100px;">
+                </a>
+                <h4>Tasche</h2>
+                <p>Die geräumige Fechttasche bietet genug Platz für all dein Equipment.</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+	<footer>
+		<p>&copy; 2023 Das Fechtoutlet. All rights reserved.</p>
+	</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
 </html>
