@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="../res/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="../js/script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
 </head>
 <body>
 	<header>
@@ -16,93 +19,17 @@
 	
     <div id="navigation"></div>
 
-	<div class="container my-4">
-		<h2>Willkommen im Fechtoutlet</h2>
-		<p>Dein Fechtshop für hochwertiges Equipment und Zubehör. Hier findest du alles, was du für dein nächstes Gefecht brauchst.</p>
-	</div>
+    <div id="content"></div>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-3 hover m-auto" onclick="selectProduct()">
-                <a href="product.html" class="product-image">
-                    <img src="../res/img/fechthelm.png" style="max-height: 100px;">
-                </a>
-                <h4>Fechthelm</h2>
-                <p> Die Fechtmaske schützt den Kopf und das Gesicht des Fechters vor Verletzungen.</p>
-            </div>
-            <div class="col-md-3 hover m-auto">
-                <a href="product.html">
-                    <img src="../res/img/fechtjacke1.png" style="max-height: 100px;">
-                </a>
-                <h4>Fechtjacke</h2>
-                <p>Die Fechtjacke ist eine spezielle Schutzbekleidung für Fechter.</p>
-            </div>
-            <div class="col-md-3 hover m-auto">
-                <a href="product.html">
-                    <img src="../res/img/fechthose1.png" style="max-height: 100px;">
-                </a>
-                <h4>Fechthose</h2>
-                <p> Die Fechthose ist eine spezielle Hose, die den Fechter vor Verletzungen schützt.</p>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-3 hover m-auto">
-                <a href="product.html">
-                    <img src="../res/img/saebel1.png" style="max-height: 100px;">
-                </a>
-                <h4>Fechtsäbel</h2>
-                <p>Der Säbel ist eine Fechtwaffe mit gebogener Klinge und scharfer Schneide.</p>
-            </div>
-            <div class="col-md-3 hover m-auto">
-                <a href="product.html">
-                    <img src="../res/img/schaumstoff1.png" style="max-height: 100px;">
-                </a>
-                <h4>Schaumstoff-Säbel</h2>
-                <p>Der Schaumstoff-Säbel ist eine sichere und spaßige Alternative zum klassischen Fechtsäbel.</p>
-            </div>
-            <div class="col-md-3 hover m-auto">
-                <a href="product.html">
-                    <img src="../res/img/shirt1.png" style="max-height: 100px;">
-                </a>
-                <h4>Funktionsshirt</h2>
-                <p>Das atmungsaktive Funktionsshirt sorgt durch seine hohe Funktionalität für ein angenehmes Tragegefühl.</p>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-3 hover m-auto">
-                <a href="product.html">
-                    <img src="../res/img/handschuh1.png" style="max-height: 100px;">
-                </a>
-                <h4>Handschuhe</h2>
-                <p>Fechthandschuhe schützen deine Hände vor Verletzungen und bieten ein besseres Griffgefühl.</p>
-            </div>
-            <div class="col-md-3 hover m-auto">
-                <a href="product.html">
-                    <img src="../res/img/socken1.png" style="max-height: 100px;">
-                </a>
-                <h4>Fechtsocken</h2>
-                <p>Fechtsocken sind spezielle Socken, die einen sicheren Halt im Fechtschuh gewährleisten.</p>
-            </div>
-            <div class="col-md-3 hover m-auto">
-                <a href="product.html">
-                    <img src="../res/img/tasche1.png" style="max-height: 100px;">
-                </a>
-                <h4>Tasche</h2>
-                <p>Die geräumige Fechttasche bietet genug Platz für all dein Equipment.</p>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
+	
 	<footer>
 		<p>&copy; 2023 Das Fechtoutlet. All rights reserved.</p>
 	</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script>
         $( document ).ready(function() {
-            $("#navigation").load("nav.html"); 
+            $("#navigation").load("nav.html");
+            $("#content").load("landingpage.html"); 
         });
     </script>
 </body>
