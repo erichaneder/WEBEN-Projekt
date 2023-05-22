@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2023 at 01:46 PM
+-- Generation Time: May 22, 2023 at 09:25 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `articles` (
   `article_id` int(11) NOT NULL,
-  `article_sizes` int(11) NOT NULL,
+  `article_sizes` int(11) NOT NULL COMMENT '"0" stands for no size options, "1" stands for clothes sizes, "2" stands for blade length options (not sure if 2 is gonna be implemented in the scope of the project) ',
   `article_price` double NOT NULL,
-  `article_attributes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`article_attributes`)),
+  `article_attributes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'Json String for all not required attributes that can be skipped',
   `article_picturepath` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -53,8 +53,8 @@ CREATE TABLE `users` (
   `user_name` varchar(50) NOT NULL,
   `user_password` varchar(200) NOT NULL,
   `user_mail` varchar(100) NOT NULL,
-  `user_role` int(11) NOT NULL,
-  `user_status` int(11) NOT NULL,
+  `user_role` int(11) NOT NULL COMMENT '"0" stands for customer, "1" stands for admin',
+  `user_status` int(11) NOT NULL COMMENT '"0" stands for inactive, "1" for an active user',
   `user_phone` varchar(30) NOT NULL,
   `user_adress` varchar(50) NOT NULL,
   `user_zipcode` varchar(50) NOT NULL,
