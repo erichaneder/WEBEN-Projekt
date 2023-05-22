@@ -9,9 +9,9 @@ function selectProduct() {
 }*/
 
 function loadContent(page) {
-    $('#content').fadeOut('fast', function() {
+    $('#content').fadeOut('slow', function() {
       $('#content').load(page, function() {
-        $('#content').fadeIn('fast');
+        $('#content').fadeIn('slow');
       });
     });
   }
