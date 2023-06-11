@@ -121,8 +121,6 @@ function loadContent(page) {
               productsDIV.append(row);
             }
           }
-          // Show the customer table
-          $('.container').show();
       },
       error: function(xhr, status, error) {
         // Handle the error
@@ -134,5 +132,58 @@ function loadContent(page) {
     });
     console.log("Finished Loading Products...");
   }
+
+
+function handleSearch(event) {
+  console.log("Starting to load products with dynamic search...");
+  var searchTerm = event.target.value;
+  console.log("Searchterm: "+ searchTerm);
+
+  // Sende AJAX-Anfrage an den Server
+  $.ajax({
+    url: '../../backend/logic/search.php', // Passe den Pfad zur Serverdatei an
+    type: 'POST',
+    dataType: 'json',
+    data: { searchTerm: searchTerm }, // Übergib den Suchbegriff an den Server
+    success: function(response) {
+      var productsDIV = $('.products');
+      // Leere den Inhalt der .products-DIV
+      productsDIV.empty();
+
+      if(response.length < 1) {
+        productsDIV.html('<p>Keine Produkte gefunden.</p>');
+      } else {
+        var row;
+        for (var i = 0; i < response.length; i++) {
+          if(i === 0 || i%3 === 0) {
+            //Create new row
+            row = $('<div>', {
+              class: 'row justify-content-center'
+            });
+          }
+          var productDetails = response[i];
+          console.log("Produktdetails: " + productDetails);
+          //var row = $('<tr>');
+          var productDIV = '<div class="col-md-3 hover m-auto" onclick="loadContent(\'product.html\')">' +
+                            '<img src="'+ productDetails.article_picturepath +'" style="max-height: 100px;">' +
+                            '<h4>'+productDetails.name+'</h4>' +
+                            '<p>'+productDetails.description+'</p>' +
+                            '</div>';
+          row.append(productDIV);
+          if(i === 0 || i%3 === 0) {
+            //Add new row to div
+            productsDIV.append(row);
+          }
+        }
+      }
+    },
+    error: function(xhr, status, error) {
+      console.log(error);
+      console.log(status);
+      //var jsonResponse = JSON.parse(xhr);
+      //console.log("ErrorResponse: "+ jsonResponse);
+    }
+  });
+}
 
   

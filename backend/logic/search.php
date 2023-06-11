@@ -7,22 +7,21 @@ if($conn->connect_error) {
     exit();
 }
 
-// Retrieve all customers
-$sql = "SELECT * FROM users";
+// Hole den Suchbegriff aus der POST-Anfrage
+$searchTerm = $_POST['searchTerm'];
+
+// Führe die Produktsuche in der Datenbank durch
+$sql = "SELECT * FROM articles WHERE name LIKE '%$searchTerm%'";
 $result = $conn->query($sql);
 
+$products = array();
 if ($result->num_rows > 0) {
-    $customers = array();
     while ($row = $result->fetch_assoc()) {
-        $customers[] = $row;
+        $products[] = $row;
     }
-    echo json_encode($customers);
-} else {
-    //return empty array
-    echo array();
-}
+} 
 
-// Close the database connection
+echo json_encode($products);
+
 $conn->close();
-
 ?>
