@@ -88,3 +88,15 @@ footer {
     height: auto;
     margin: 0 auto;
   }
+
+  .nav-divider {
+    display: inline-block;
+    width: 1px;
+    height: 60px;
+    background-color: #ccc;
+    margin: 0 10px;
+  }
+
+  .cart-icon {
+    font-size: 1.5em;
+  }

@@ -8,7 +8,7 @@
             <p class="text-muted mb-2">SKU: 309030</p>
             <p class="mb-2"><span class="text-primary h4">€49,99</span></p>
             <p class="text-muted mb-3">inkl. MwSt., zzgl. Versandkosten</p>
-            <form>
+            <!--<form> Form is not really needed I think, also reloads site when sth is added to baskets which is pain-->
               <div class="form-group">
                 <label for="sizeSelect">Größe auswählen:</label>
                 <select class="form-control" id="sizeSelect">
@@ -24,8 +24,8 @@
                 <input type="number" class="form-control" id="quantityInput" value="1" min="1">
               </div>
               <br>
-              <button type="submit" class="btn btn-primary mb-2">In den Warenkorb</button>
-            </form>
+              <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()">In den Warenkorb</button>
+            <!--</form> -->
             <p class="text-muted mt-3">Lieferzeit: 3-5 Werktage</p>
             <hr>
             <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>

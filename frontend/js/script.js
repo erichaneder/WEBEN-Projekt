@@ -1,4 +1,6 @@
 
+var cart = [];
+
 function loadContent(page) {
     console.log("Loading Content...");
     $('#content').fadeOut('slow', function() {
@@ -9,6 +11,8 @@ function loadContent(page) {
           loadCustomers();
         } else if (page === 'landingpage.html') {
           loadProducts();
+        } else if(page === 'basket.html') {
+          loadBasket();
         }
       });
     });
@@ -185,5 +189,63 @@ function handleSearch(event) {
     }
   });
 }
+
+function loadBasket() {
+  var cartDiv = $('.cart');
+  cartDiv.empty(); // Clear the cart div before populating it with new content
+
+  // Check if the cart is empty
+  if (cart.length === 0) {
+    cartDiv.append('<p>Der Warenkorb ist leer.</p>');
+    return; // Exit the function if the cart is empty
+  }
+
+  // Loop through each product in the cart
+  for (var i = 0; i < cart.length; i++) {
+    var product = cart[i];
+
+    // Create the HTML for the product display
+    var productHTML = `
+      <div class="cart-item">
+        <h4>${product.name}</h4>
+        <p>Preis: €${product.price.toFixed(2)}</p>
+        <p>Größe: ${product.size}</p>
+        <p>Menge: ${product.quantity}</p>
+      </div>
+      <hr>
+    `;
+
+    cartDiv.append(productHTML);
+  }
+}
+
+function addToCart() {
+  console.log("Adding to cart...");
+  // Get the selected product details
+  var productName = $('.col-md-6 h2').text();
+  var productPrice = parseFloat($('.col-md-6 .text-primary').text().replace('€', ''));
+  var productSize = $('#sizeSelect').val();
+  var productQuantity = parseInt($('#quantityInput').val());
+
+  // Create the product object
+  var product = {
+    name: productName,
+    price: productPrice,
+    size: productSize,
+    quantity: productQuantity
+  };
+
+  // Add the product to the cart array
+  cart.push(product);
+
+  // update cart count
+  $('#cartCount').text("" + cart.length);
+
+  console.log("CartLength:" + cart.length);
+}
+
+
+
+
 
   

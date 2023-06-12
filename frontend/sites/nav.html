@@ -23,11 +23,21 @@
     </ul>
     <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
       <li class="nav-item col-6 col-lg-auto">
+        <a class="nav-link py-3 px-0 px-lg-2" href="#" onclick="loadContent('basket.html')">
+          <i class="fas fa-shopping-cart cart-icon"></i>
+          <span id="cartCount" class="top-10 translate-middle badge rounded-pill bg-danger">0</span>
+        </a>
+      </li>
+      <li class="nav-item col-6 col-lg-auto">
+        <span class="nav-divider"></span> <!-- Divider um den Basket von den Login/Register Buttons zu trennen-->
+      </li>
+      <li class="nav-item col-6 col-lg-auto">
         <a class="nav-link py-3 px-0 px-lg-2" href="#" onclick="loadContent('register.html')">REGISTER</a>
       </li>
       <li class="nav-item col-6 col-lg-auto">
         <a class="nav-link py-3 px-0 px-lg-2" href="#" onclick="loadContent('login.html')">LOGIN</a>
       </li>
+      
     </ul>
   </div>
 </nav>
