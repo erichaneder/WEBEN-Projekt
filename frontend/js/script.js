@@ -8,15 +8,40 @@ function loadContent(page) {
         $('#content').fadeIn('slow');
         console.log("Loading Content2...");
         if (page === 'users.html') {
+          handleActiveTab('users');
           loadCustomers();
         } else if (page === 'landingpage.html') {
+          handleActiveTab('home');
           loadProducts();
         } else if(page === 'basket.html') {
+          handleActiveTab('basket');
           loadBasket();
+        } else if(page === 'orders.html') {
+          handleActiveTab('orders');
+          loadOrders();
+        } else if(page === 'contact.html') {
+          handleActiveTab('contact');
+        } else if(page === 'about.html') {
+          handleActiveTab('about');
+        } else if(page === 'produktbearbeitung.html') {
+          handleActiveTab('addProducts');
+        } else if(page === 'login.html') {
+          handleActiveTab('login');
+        } else if(page === 'register.html') {
+          handleActiveTab('register');
         }
       });
     });
     console.log("Finished Loading Content...");
+  }
+
+  function handleActiveTab(tab) {
+    console.log("Handling active tab for: "+tab);
+    console.log("1: " + $('.active').attr("class"));
+    $('.active').removeClass("active");
+    $('.'+tab).addClass("active");
+    console.log("2: " + $('.active').attr("class"));
+    console.log("Finished Handling active tab for: "+tab);
   }
 
   function deactivateCustomer() {
@@ -242,6 +267,42 @@ function addToCart() {
   $('#cartCount').text("" + cart.length);
 
   console.log("CartLength:" + cart.length);
+}
+
+function loadOrders() {
+
+  $.ajax({
+    url: '../../backend/logic/getOrders.php',
+    method: 'GET',
+    dataType: 'json',
+    success: function(response) {
+      // Handle the response and populate the order list
+      if (response.length > 0) {
+        var orderList = $('#orderList');
+        $.each(response, function(index, order) {
+          var row = $('<tr>');
+          row.append($('<td>').text(order.id));
+          row.append($('<td>').text(order.user_name));
+          row.append($('<td>').text(order.user_mail));
+          row.append($('<td>').text(order.order_date));
+          row.append($('<td>').text(order.total_cost+" €"));
+          
+          orderList.append(row);
+        });
+      } else {
+        // Display a message if no orders found
+        $('#orderList').html('<tr><td colspan="3">No orders found</td></tr>');
+      }
+    },
+    error: function(xhr, status, error) {
+      // Handle error case
+      $('#orderList').html('<tr><td colspan="3">Error occurred while fetching orders</td></tr>');
+      console.log(error);
+      console.log(status);
+      var jsonResponse = JSON.parse(xhr);
+      console.log("ErrorResponse: "+ jsonResponse);
+    }
+  });
 }
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 06. Jun 2023 um 17:56
+-- Erstellungszeit: 16. Jun 2023 um 14:19
 -- Server-Version: 10.4.24-MariaDB
 -- PHP-Version: 8.1.6
 
@@ -42,7 +42,7 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`article_id`, `article_sizes`, `article_price`, `article_attributes`, `article_picturepath`, `name`, `description`) VALUES
-(1, 1, 9, '{\"Hersteller\": \"Spes\",\"Nummer\": \"1234-5678-9012-3456\",\"Produktbeschreibung\": \"Hier könnte ihre Produktbeschreibung stehen\"}\r\n', '../res/img/fechthelm.png', 'Test', 'Testssadadadadadadadadadadada asdadsadadadasdadad.'),
+(1, 1, 9, '{\"Hersteller\": \"Spes\",\"Nummer\": \"1234-5678-9012-3456\",\"Produktbeschreibung\": \"Hier könnte ihre Produktbeschreibung stehen\"}\n', '../res/img/fechthelm.png', 'Test', 'Testssadadadadadadadadadadada asdadsadadadasdadad.'),
 (2, 1, 10, 'qwqeqew', '../res/img/fechthelm.png', 'Fechthelm', 'Die Fechtmaske schützt den Kopf und das Gesicht des Fechters vor Verletzungen.'),
 (3, 1, 10, '2313123', '../res/img/fechtjacke1.png', 'Fechtjacke', 'Die Fechtjacke ist eine spezielle Schutzbekleidung für Fechter.'),
 (4, 1, 10, '1232112', '../res/img/fechthose1.png', 'Fechthose', 'Die Fechthose ist eine spezielle Hose, die den Fechter vor Verletzungen schützt.'),
@@ -52,6 +52,29 @@ INSERT INTO `articles` (`article_id`, `article_sizes`, `article_price`, `article
 (8, 1, 1, 'sdsdads', '../res/img/handschuh1.png', 'Handschuhe', 'Fechthandschuhe schützen deine Hände vor Verletzungen und bieten ein besseres Griffgefühl.'),
 (9, 1, 44, 'sadasdads', '../res/img/socken1.png', 'Fechtsocken', 'Fechtsocken sind spezielle Socken, die einen sicheren Halt im Fechtschuh gewährleisten.'),
 (10, 1, 1, 'sdasasda', '../res/img/tasche1.png', 'Tasche', 'Die geräumige Fechttasche bietet genug Platz für all dein Equipment.');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `order_date` date NOT NULL,
+  `total_cost` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Daten für Tabelle `orders`
+--
+
+INSERT INTO `orders` (`id`, `customer_id`, `order_date`, `total_cost`) VALUES
+(1, 1, '2023-06-15', 112),
+(2, 1, '2023-06-16', 23.5),
+(3, 2, '2023-06-15', 112.2),
+(4, 2, '2023-06-16', 23);
 
 -- --------------------------------------------------------
 
@@ -79,7 +102,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_mail`, `user_role`, `user_status`, `user_phone`, `user_adress`, `user_zipcode`, `user_city`, `user_billingname`, `user_country`) VALUES
-(1, 'outlet_admin', '1234', 'wi22b038@technikum-wien.at', 1, 1, '0664/6271166', 'Haasgasse 7', '2120', 'Wolkersdorf', 'Haas David', 'Österreich');
+(1, 'outlet_admin', '1234', 'wi22b038@technikum-wien.at', 1, 1, '0664/6271166', 'Haasgasse 7', '2120', 'Wolkersdorf', 'Haas David', 'Österreich'),
+(2, 'Ben Benson', '1234', 'ben.benson@gmail.com', 1, 1, '231321313', 'Bahnstraße 12', '2013', 'Hollabrunn', 'Ben Benson', 'Austria');
 
 --
 -- Indizes der exportierten Tabellen
@@ -90,6 +114,12 @@ INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_mail`, `user
 --
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`article_id`);
+
+--
+-- Indizes für die Tabelle `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indizes für die Tabelle `users`
@@ -108,10 +138,16 @@ ALTER TABLE `articles`
   MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT für Tabelle `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
