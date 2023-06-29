@@ -29,7 +29,7 @@ function loadContent(page) {
           handleActiveTab('login');
         } else if(page === 'register.html') {
           handleActiveTab('register');
-        }
+        } 
       });
     });
     console.log("Finished Loading Content...");
@@ -139,7 +139,8 @@ function loadContent(page) {
             var productDetails = response[i];
             console.log("Produktdetails: " + productDetails);
             //var row = $('<tr>');
-            var productDIV = '<div class="col-md-3 hover m-auto" onclick="loadContent(\'product.html\')">' +
+            var productDIV = '<div class="col-md-3 hover m-auto"' + 
+                              'onclick="loadProduct(\''+productDetails.article_picturepath+'\', \''+productDetails.name+'\', \''+productDetails.description+'\', '+productDetails.article_price+')">' +
                               '<img src="'+ productDetails.article_picturepath +'" style="max-height: 100px;">' +
                               '<h4>'+productDetails.name+'</h4>' +
                               '<p>'+productDetails.description+'</p>' +
@@ -160,6 +161,23 @@ function loadContent(page) {
       }
     });
     console.log("Finished Loading Products...");
+  }
+
+  function loadProduct(path, name, description, price) {
+    $('#content').fadeOut('slow', function() {
+      $('#content').load('product.html', function() {
+        $('#content').fadeIn('slow');
+        
+        //((do loading logic here))
+        $('#name').text(name);
+        $('#description').text(description);
+        $('#price').text('€' + price.toFixed(2));
+        $('#picturepath').prop('src', path);
+        
+        
+
+      });
+    });
   }
 
 
@@ -216,14 +234,21 @@ function handleSearch(event) {
 }
 
 function loadBasket() {
+  //Get things we need in a variable
   var cartDiv = $('.cart');
+  var cartSummary = $('.cart-summary');
+  var totalPriceSpan = $('#totalPrice');
+
   cartDiv.empty(); // Clear the cart div before populating it with new content
+  totalPriceSpan.text('€0.00'); // Reset the total price
 
   // Check if the cart is empty
   if (cart.length === 0) {
     cartDiv.append('<p>Der Warenkorb ist leer.</p>');
     return; // Exit the function if the cart is empty
   }
+
+  var totalPrice = 0; // Variable to store the total price
 
   // Loop through each product in the cart
   for (var i = 0; i < cart.length; i++) {
@@ -236,11 +261,129 @@ function loadBasket() {
         <p>Preis: €${product.price.toFixed(2)}</p>
         <p>Größe: ${product.size}</p>
         <p>Menge: ${product.quantity}</p>
+        <button class="btn btn-danger btnRemoveProduct" data-index="${i}">Entfernen</button>
+        <button class="btn btn-primary btnDecreaseQuantity" data-index="${i}">-</button>
+        <button class="btn btn-primary btnIncreaseQuantity" data-index="${i}">+</button>
       </div>
-      <hr>
-    `;
-
+      <hr>`;
     cartDiv.append(productHTML);
+
+    // Add the product price to the total price
+    totalPrice += product.price * product.quantity;
+  }
+
+  // Update the total price display
+  totalPriceSpan.text('€' + totalPrice.toFixed(2));
+
+  // Add click event listeners for removing a product and increasing quantity
+  $('.btnRemoveProduct').click(function() {
+    var index = $(this).data('index');
+    removeProductFromCart(index);
+    loadBasket(); // Reload the cart to update the display
+  });
+
+  $('.btnIncreaseQuantity').click(function() {
+    var index = $(this).data('index');
+    increaseProductQuantity(index);
+    loadBasket(); // Reload the cart to update the display
+  });
+
+  $('.btnDecreaseQuantity').click(function() {
+    var index = $(this).data('index');
+    decreaseProductQuantity(index);
+    loadBasket(); // Reload the cart to update the display
+  });
+
+  // Add click event listener for clearing the entire cart
+  $('#btnClearCart').click(function() {
+    cart = []; //clears cart
+    loadBasket(); // Reload the cart to update the display
+  });
+
+  // Add click event listener for the checkout button
+  $('#btnCheckout').click(function() {
+    // Perform the checkout process
+    // You can redirect the user to the checkout page or handle the process as per your requirements
+    orderBasket();
+    loadContent('orders.html');
+  });
+}
+
+function orderBasket() {
+  
+    // Create an array to hold the product details
+    var products = [];
+
+    // Loop through each product in the cart and populate the array
+    for (var i = 0; i < cart.length; i++) {
+      var product = cart[i];
+      products.push({
+        name: product.name,
+        price: product.price,
+        size: product.size,
+        quantity: product.quantity
+      });
+    }
+  
+    // Create the data object to be sent in the AJAX request
+    var data = {
+      products: products
+    };
+  
+    // Make the AJAX request
+    $.ajax({
+      url: '../../backend/logic/postOrder.php', // Replace with the actual URL of your PHP script
+      method: 'POST',
+      data: data,
+      success: function(response) {
+        // Handle the success response
+        console.log(response);
+        // You can perform any additional actions here, such as displaying a success message
+      },
+      error: function(xhr, status, error) {
+        // Handle the error response
+        console.error(error);
+        // You can display an error message or take other actions here
+      }
+    });  
+
+  cart = [];
+}
+
+function removeProductFromCart(index) {
+  // Check if the index is within the valid range of the cart array
+  if (index >= 0 && index < cart.length) {
+    // Remove the product at the specified index from the cart array
+    cart.splice(index, 1);
+  }
+  // update cart count
+  $('#cartCount').text("" + cart.length);
+}
+
+function increaseProductQuantity(index) {
+  // Check if the index is valid
+  if (index >= 0 && index < cart.length) {
+    // Get the product at the specified index
+    var product = cart[index];
+    
+    // Increase the quantity by 1
+    product.quantity += 1;
+  }
+}
+
+function decreaseProductQuantity(index) {
+  // Check if the index is valid
+  if (index >= 0 && index < cart.length) {
+    // Get the product at the specified index
+    var product = cart[index];
+    
+    // Increase the quantity by 1
+    product.quantity -= 1;
+
+    //if quantity is now 0 -> remove from cart
+    if(product.quantity === 0) {
+      removeProductFromCart(index);
+    }
   }
 }
 
