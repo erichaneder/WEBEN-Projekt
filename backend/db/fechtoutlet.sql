@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 16. Jun 2023 um 14:19
+-- Erstellungszeit: 29. Jun 2023 um 19:05
 -- Server-Version: 10.4.24-MariaDB
 -- PHP-Version: 8.1.6
 
@@ -63,18 +63,21 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `order_date` date NOT NULL,
-  `total_cost` float DEFAULT NULL
+  `total_cost` float DEFAULT NULL,
+  `product_name` text NOT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `orders`
 --
 
-INSERT INTO `orders` (`id`, `customer_id`, `order_date`, `total_cost`) VALUES
-(1, 1, '2023-06-15', 112),
-(2, 1, '2023-06-16', 23.5),
-(3, 2, '2023-06-15', 112.2),
-(4, 2, '2023-06-16', 23);
+INSERT INTO `orders` (`id`, `customer_id`, `order_date`, `total_cost`, `product_name`, `quantity`) VALUES
+(1, 1, '2023-06-15', 112, '', 0),
+(2, 1, '2023-06-16', 23.5, '', 0),
+(3, 2, '2023-06-15', 112.2, '', 0),
+(4, 2, '2023-06-16', 23, '', 0),
+(5, 1, '2023-06-29', 10, 'Fechthelm', 1);
 
 -- --------------------------------------------------------
 
@@ -141,7 +144,7 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT für Tabelle `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`

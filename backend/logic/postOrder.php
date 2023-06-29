@@ -14,17 +14,19 @@ if ($conn->connect_error) {
 }
 
 // Prepare the SQL statement
-$sql = "INSERT INTO orders (product_name, price, size, quantity) VALUES (?, ?, ?, ?)";
+$sql = "INSERT INTO orders (customer_id, order_date, product_name, total_cost, quantity) VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 
 // Bind the parameters
-$stmt->bind_param("sssi", $productName, $price, $size, $quantity);
+$stmt->bind_param("issii", $customerId, $orderDate, $productName, $price, $quantity);
 
 // Insert each product into the database
-foreach ($orderData as $product) {
+foreach ($orderData as $product) {      
+    $customerId = 1;                        // --> here insert customerId dynamically with session
+    $orderDate = date('Y-m-d');
     $productName = $product['name'];
     $price = $product['price'];
-    $size = $product['size'];
+    //$size = $product['size']; --maybe implement this if time
     $quantity = $product['quantity'];
 
     $stmt->execute();

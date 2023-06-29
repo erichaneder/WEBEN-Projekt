@@ -37,10 +37,8 @@ function loadContent(page) {
 
   function handleActiveTab(tab) {
     console.log("Handling active tab for: "+tab);
-    console.log("1: " + $('.active').attr("class"));
     $('.active').removeClass("active");
     $('.'+tab).addClass("active");
-    console.log("2: " + $('.active').attr("class"));
     console.log("Finished Handling active tab for: "+tab);
   }
 
@@ -329,7 +327,7 @@ function orderBasket() {
     var data = {
       products: products
     };
-  
+    console.log("posting Order... Data: " + data);
     // Make the AJAX request
     $.ajax({
       url: '../../backend/logic/postOrder.php', // Replace with the actual URL of your PHP script
