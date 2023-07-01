@@ -29,7 +29,10 @@ function loadContent(page) {
           handleActiveTab('login');
         } else if(page === 'register.html') {
           handleActiveTab('register');
-        } 
+        } else if(page === 'profil.html') {
+          handleActiveTab('profil');
+          loadProfile();
+        }
       });
     });
     console.log("Finished Loading Content...");
@@ -170,7 +173,7 @@ function loadContent(page) {
         $('#name').text(name);
         $('#description').text(description);
         $('#price').text('€' + price.toFixed(2));
-        $('#picturepath').prop('src', path);
+        $('#productpicture').prop('src', path);
         
         
 
@@ -420,16 +423,27 @@ function loadOrders() {
       // Handle the response and populate the order list
       if (response.length > 0) {
         var orderList = $('#orderList');
+        var totalCost = 0; // Variable to store the total cost
+
         $.each(response, function(index, order) {
           var row = $('<tr>');
           row.append($('<td>').text(order.id));
           row.append($('<td>').text(order.user_name));
           row.append($('<td>').text(order.user_mail));
           row.append($('<td>').text(order.order_date));
+          row.append($('<td>').text(order.product_name));
+          row.append($('<td>').text(order.quantity));
           row.append($('<td>').text(order.total_cost+" €"));
           
           orderList.append(row);
+          totalCost += parseFloat(order.total_cost); //add to total cost
         });
+
+        // Add the total cost row
+        var totalRow = $('<tr>');
+        totalRow.append($('<td colspan="6"><strong>Total Cost:</strong></td>'));
+        totalRow.append($('<td><strong>' + totalCost.toFixed(2) + ' €</strong></td>'));
+        orderList.append(totalRow);
       } else {
         // Display a message if no orders found
         $('#orderList').html('<tr><td colspan="3">No orders found</td></tr>');
@@ -444,6 +458,33 @@ function loadOrders() {
       console.log("ErrorResponse: "+ jsonResponse);
     }
   });
+}
+
+function loadProfile() {
+      // Make an AJAX request to fetch the user's profile data
+      $.ajax({
+        url: '../../backend/logic/getProfile.php', 
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            // Handle the success response
+            var profileData = $('#profileData');
+            // Populate the profileData div with the user's account data
+            profileData.append('<p>Name: ' + response.user_name + '</p>');
+            profileData.append('<p>Email: ' + response.user_mail + '</p>');
+            profileData.append('<p>Phone: ' + response.user_phone + '</p>');
+            profileData.append('<p>Adress: ' + response.user_adress + '</p>');
+            profileData.append('<p>Zip: ' + response.user_zipcode + '</p>');
+            profileData.append('<p>City: ' + response.user_city + '</p>');
+            profileData.append('<p>Country: ' + response.user_country + '</p>');
+            // Add more fields as per your requirements
+        },
+        error: function(xhr, status, error) {
+            // Handle the error response
+            console.error(error);
+            // Display an error message or take other actions as needed
+        }
+    });
 }
 
 
