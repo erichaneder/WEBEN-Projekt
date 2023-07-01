@@ -7,8 +7,10 @@ if($conn->connect_error) {
     exit();
 }
 
+$userid = $_GET['userid'];
+
 // Retrieve all customers
-$sql = "SELECT * FROM users where user_id = 1"; // <---- Here put in userid dinamically
+$sql = "SELECT * FROM users where user_id = " . $userid; 
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

@@ -31,7 +31,23 @@ function loadContent(page) {
           handleActiveTab('register');
         } else if(page === 'profil.html') {
           handleActiveTab('profil');
-          loadProfile();
+          loadProfile(2);
+        }
+      });
+    });
+    console.log("Finished Loading Content...");
+  }
+
+  function loadContent(page, userid) {
+    console.log("Loading Content...");
+    $('#content').fadeOut('slow', function() {
+      $('#content').load(page, function() {
+        $('#content').fadeIn('slow');
+        console.log("Loading Content2...");
+        
+        if(page === 'profil.html') {
+          handleActiveTab('profil');
+          loadProfile(userid);
         }
       });
     });
@@ -189,7 +205,7 @@ function handleSearch(event) {
 
   // Sende AJAX-Anfrage an den Server
   $.ajax({
-    url: '../../backend/logic/search.php', // Passe den Pfad zur Serverdatei an
+    url: '../../backend/logic/search.php', 
     type: 'POST',
     dataType: 'json',
     data: { searchTerm: searchTerm }, // Übergib den Suchbegriff an den Server
@@ -460,10 +476,10 @@ function loadOrders() {
   });
 }
 
-function loadProfile() {
+function loadProfile(userid) {
       // Make an AJAX request to fetch the user's profile data
       $.ajax({
-        url: '../../backend/logic/getProfile.php', 
+        url: '../../backend/logic/getProfile.php?userid=' + userid, 
         method: 'GET',
         dataType: 'json',
         success: function(response) {
