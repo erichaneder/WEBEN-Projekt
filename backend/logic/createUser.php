@@ -41,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    error_log("Passed validation");
+    //Password hashen
+    $hashpw = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     // Insert the user data into the database
     $sql = "INSERT INTO users (user_name, user_mail, user_password, user_adress, user_city, user_zipcode, user_country, user_phone, user_billingname, user_role, user_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -52,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userStatus = 1; // Active user status
 
     // Bind the form data to the prepared statement
-    $stmt->bind_param("sssssssssii", $_POST['username'], $_POST['email'], $_POST['password'], $_POST['address'], $_POST['city'], $_POST['zip'], $_POST['country'], $_POST['phone'], $_POST['billingName'], $userRole, $userStatus);
+    $stmt->bind_param("sssssssssii", $_POST['username'], $_POST['email'], $hashpw, $_POST['address'], $_POST['city'], $_POST['zip'], $_POST['country'], $_POST['phone'], $_POST['billingName'], $userRole, $userStatus);
     $stmt->execute();
 
     // Check if the user was successfully inserted

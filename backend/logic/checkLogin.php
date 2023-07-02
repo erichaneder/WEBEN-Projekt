@@ -14,15 +14,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     
     }
-    $sql = "SELECT user_id FROM users where user_mail = '" . $email . "' and user_password = '" . $password."'";
-    $result = $conn->query($sql);
 
+    //checken ob das pw gleich dem gehashten aus der db ist
+    $hashpw = password_hash($password, PASSWORD_DEFAULT);
+
+    $sql = "SELECT * FROM users where user_mail = '" . $email . "'";
+    $result = $conn->query($sql);
+                
     if ($result->num_rows > 0) {
+
         $users = $result->fetch_assoc();
-        $userid = $users['user_id'];
+        $dbpw = $users['user_password'];
+        //verify password
+        if(password_verify($password, $dbpw)) {
+            $userid = $users['user_id'];
+        } else {
+            echo "Credentials did not match!";
+
+        exit();
+        }
     } else {
         // error handling, no user found for these credentials
-        echo "Credentials did not match!";
+        echo "No customer with this email found!";
         exit();
     }
 
