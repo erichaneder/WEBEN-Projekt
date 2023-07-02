@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user'] = $userId;
     
         // Redirect to the desired page after successful login (checkLogin.php in this case)
-        header('Location: index.php');
+        header('Location: ../../frontend/sites/index.php');
         exit();
     } else {
         // Failed to insert the user, handle the error accordingly
