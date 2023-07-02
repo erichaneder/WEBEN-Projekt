@@ -22,7 +22,7 @@ $stmt->bind_param("issii", $customerId, $orderDate, $productName, $price, $quant
 
 // Insert each product into the database
 foreach ($orderData as $product) {      
-    $customerId = 1;                        // --> here insert customerId dynamically with session
+    $customerId = $product['userid'];                        
     $orderDate = date('Y-m-d');
     $productName = $product['name'];
     $price = $product['price'];

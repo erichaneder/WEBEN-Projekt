@@ -27,19 +27,17 @@ function loadContent(page) {
     $('#content').fadeOut('slow', function() {
       $('#content').load(page, function() {
         $('#content').fadeIn('slow');
-        console.log("Loading Content2...");
+        console.log("Loading NORMAL CONTENT...");
         if (page === 'users.html') {
           handleActiveTab('users');
           loadCustomers();
         } else if (page === 'landingpage.html') {
           handleActiveTab('home');
           loadProducts();
-        } else if(page === 'basket.html') {
+        } else if(page === 'basket.php') {
+          console.log("Loading Basket Page..");
           handleActiveTab('basket');
           loadBasket();
-        } else if(page === 'orders.html') {
-          handleActiveTab('orders');
-          loadOrders();
         } else if(page === 'contact.html') {
           handleActiveTab('contact');
         } else if(page === 'about.html') {
@@ -59,8 +57,8 @@ function loadContent(page) {
     console.log("Finished Loading Content...");
   }
 
-  function loadContent(page, userid) {
-    console.log("Loading Content...");
+  function loadUserContent(page, userid) {
+    console.log("Loading Content for user...");
     $('#content').fadeOut('slow', function() {
       $('#content').load(page, function() {
         $('#content').fadeIn('slow');
@@ -69,10 +67,13 @@ function loadContent(page) {
         if(page === 'profil.html') {
           handleActiveTab('profil');
           loadProfile(userid);
+        } else if(page === 'orders.html') {
+          handleActiveTab('orders');
+          loadOrders(userid);
         }
       });
     });
-    console.log("Finished Loading Content...");
+    console.log("Finished Loading Content for user...");
   }
 
   function handleActiveTab(tab) {
@@ -276,7 +277,7 @@ function loadBasket() {
   var cartDiv = $('.cart');
   var cartSummary = $('.cart-summary');
   var totalPriceSpan = $('#totalPrice');
-
+  console.log("Cart: " + cart);
   cartDiv.empty(); // Clear the cart div before populating it with new content
   totalPriceSpan.text('€0.00'); // Reset the total price
 
@@ -305,7 +306,7 @@ function loadBasket() {
       </div>
       <hr>`;
     cartDiv.append(productHTML);
-
+    console.log("CartDiv appended.");
     // Add the product price to the total price
     totalPrice += product.price * product.quantity;
   }
@@ -337,18 +338,10 @@ function loadBasket() {
     cart = []; //clears cart
     loadBasket(); // Reload the cart to update the display
   });
-
-  // Add click event listener for the checkout button
-  $('#btnCheckout').click(function() {
-    // Perform the checkout process
-    // You can redirect the user to the checkout page or handle the process as per your requirements
-    orderBasket();
-    loadContent('orders.html');
-  });
 }
 
-function orderBasket() {
-  
+function orderBasket(userid) {
+    console.log("Ordering basket...");
     // Create an array to hold the product details
     var products = [];
 
@@ -359,7 +352,8 @@ function orderBasket() {
         name: product.name,
         price: product.price,
         size: product.size,
-        quantity: product.quantity
+        quantity: product.quantity,
+        userid:  userid
       });
     }
   
@@ -386,6 +380,7 @@ function orderBasket() {
     });  
 
   cart = [];
+  loadContent('orders.html', userid);
 }
 
 function removeProductFromCart(index) {
@@ -450,10 +445,10 @@ function addToCart() {
   console.log("CartLength:" + cart.length);
 }
 
-function loadOrders() {
+function loadOrders(userid) {
 
   $.ajax({
-    url: '../../backend/logic/getOrders.php',
+    url: '../../backend/logic/getOrders.php?userid=' + userid,
     method: 'GET',
     dataType: 'json',
     success: function(response) {
