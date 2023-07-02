@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log("Submitted params");
 
     // Create connection
-    require_once('../../backend/config/dbaccess.php');
+    require_once('../config/dbaccess.php');
     $conn = new mysqli($host, $user, $dbpassword, $database);
     if ($conn->connect_error) {
         echo "Connection Error: " . $conn->connect_error;
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userStatus = 1; // Active user status
 
     // Bind the form data to the prepared statement
-    $stmt->bind_param("ssssssssiii", $_POST['username'], $_POST['email'], $_POST['password'], $_POST['address'], $_POST['city'], $_POST['zip'], $_POST['country'], $_POST['phone'], $_POST['billingName'], $userRole, $userStatus);
+    $stmt->bind_param("sssssssssii", $_POST['username'], $_POST['email'], $_POST['password'], $_POST['address'], $_POST['city'], $_POST['zip'], $_POST['country'], $_POST['phone'], $_POST['billingName'], $userRole, $userStatus);
     $stmt->execute();
 
     // Check if the user was successfully inserted
