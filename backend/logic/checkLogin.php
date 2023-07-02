@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    require_once('../../backend/config/dbaccess.php');
+    require_once('../config/dbaccess.php');
     $conn = new mysqli($host, $user, $dbpassword, $database);
     if($conn->connect_error) {
         echo "Connection Error: " . $conn->connect_error;
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['user'] = $userid; //userid von der db setzen
 
     // Redirect to the desired page after successful login
-    header('Location: index.php');
+    header('Location: ../../frontend/sites/index.php');
     exit();
 }
 ?>

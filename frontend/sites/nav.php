@@ -41,8 +41,11 @@
       <?php
         if(isset($_SESSION["user"])) {
           echo '<li class="nav-item col-6 col-lg-auto profil">
-          <a class="nav-link py-3 px-0 px-lg-2" href="#" onclick="loadContent(\'profil.html\', '.$_SESSION["user"].')">Mein Konto</a>
-        </li>';
+              <a class="nav-link py-3 px-0 px-lg-2" href="#" onclick="loadContent(\'profil.html\', '.$_SESSION["user"].')">Mein Konto</a>
+            </li>
+            <li class="nav-item col-6 col-lg-auto login">
+              <a class="nav-link py-3 px-0 px-lg-2" href="#" onclick="logoutUser()">LOGOUT</a>
+            </li>';
         }
       ?>
       <?php

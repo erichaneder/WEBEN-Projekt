@@ -1,6 +1,54 @@
 
 var cart = [];
 
+function logoutUser() {
+  // Fade out the content container
+  $('#content').fadeOut('slow', function() {
+    // Make an AJAX request to logout.php
+    fetch('../../backend/logic/logout.php')
+      .then(response => response.json())
+      .then(data => {
+        // Check if the logout was successful based on the response
+        if (data.status === 'success') {
+          // Reload the page after a short delay to allow the fade-out effect to complete
+          setTimeout(() => {
+            location.reload();
+            loadContent('landingpage.html');
+          }, 500); // Adjust the delay as needed
+        } else {
+          // Handle errors if the logout request fails
+          console.error('Logout failed');
+        }
+      })
+      .catch(error => {
+        // Handle any network or other errors
+        console.error('Logout failed', error);
+      });
+  });
+}
+
+
+function logoutUserLegacy() {
+  cart = [];
+
+  fetch('../../backend/logic/logout.php')
+    .then(response => {
+      if (response.ok) {
+        // Session destroyed successfully
+        // Redirect to the homepage or any other desired page
+        location.reload();
+        loadContent('landingpage.html');
+      } else {
+        // Handle error
+        console.log('Error: Session not destroyed');
+      }
+    })
+    .catch(error => {
+      // Handle error
+      console.log('Error: ' + error);
+    });
+  }
+
 function loadContent(page) {
     console.log("Loading Content...");
     $('#content').fadeOut('slow', function() {
