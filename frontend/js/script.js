@@ -561,7 +561,7 @@ function checkLogin() {
 
   email = $("#exampleInputEmail1").val();
   password = $("#exampleInputPassword1").val();
-  remember = $("#rememberCheckbox").val();
+  remember = $("#rememberCheckbox").prop("checked");
 
   console.log("Email: "+email);
   console.log("PW: "+password);

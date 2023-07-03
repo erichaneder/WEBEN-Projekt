@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-3 text-center">
                 <div class="form-group form-check">
-                    <input type="checkbox" name="remember" class="form-check-input" id="rememberCheckbox">
+                    <input type="checkbox" name="remember" class="form-check-input" id="rememberCheckbox" <?php if(isset($_COOKIE['remembered_email'])) echo 'checked'; ?>>
                     <label class="form-check-label" for="rememberCheckbox">Remember me</label>
                 </div>
             </div>
