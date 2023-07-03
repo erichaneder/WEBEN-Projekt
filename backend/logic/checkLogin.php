@@ -36,19 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(password_verify($password, $dbpw)) {
             $userid = $users['user_id'];
         } else {
-            echo "Credentials did not match!";
-
-        exit();
+            $_SESSION['error_message_login'] = "Zugangsdaten oder Passwort inkorrekt!";
+            header('Location: ../../frontend/sites/index.php');
+            exit();
         }
     } else {
         // error handling, no user found for these credentials
-        echo "No customer with this email found!";
+        $_SESSION['error_message_login'] = "Zugangsdaten oder Passwort inkorrekt!";
+        header('Location: ../../frontend/sites/index.php');
         exit();
     }
 
     $_SESSION['user'] = $userid; //userid von der db setzen
 
     // Redirect to the desired page after successful login
+    $_SESSION['message'] = "Herzlich willkommen";
     header('Location: ../../frontend/sites/index.php');
     exit();
 }

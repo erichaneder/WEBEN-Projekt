@@ -1,6 +1,21 @@
 
 var cart = [];
 
+function showToast(message) {
+  // Select the toast element
+  var toastElement = document.getElementById('errorToast');
+
+  // Set the message text
+  var toastBody = toastElement.querySelector('.toast-body');
+  toastBody.textContent = message;
+
+  // Initialize the toast using Bootstrap's Toast API
+  var toast = new bootstrap.Toast(toastElement);
+
+  // Show the toast
+  toast.show();
+}
+
 function logoutUser() {
   cart = [];
 

@@ -36,18 +36,39 @@ if(isset($_SESSION['user'])) {
     <div class="page">
         <div id="content"></div>
     </div>
-    
 
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <!-- Toast element to display the error message -->
+        <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body"></div>
+        </div>
+    </div>
 	
 	<footer>
 		<p>&copy; 2023 Das Fechtoutlet. All rights reserved.</p>
 	</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script>
-        $( document ).ready(function() {
+        $(document).ready(function() {
             $("#navigation").load("nav.php");
-            $("#content").load("landingpage.html"); 
-            loadProducts();
+            <?php 
+            if (isset($_SESSION['error_message_login'])) {
+                // If there's an error message in the session, load login.php and show the toast message
+                echo "$(\"#content\").load(\"login.php\", function() {";
+                echo "showToast('" . $_SESSION["error_message_login"] . "');";
+                echo "});";
+                unset($_SESSION["error_message_login"]);
+            } else  if (isset($_SESSION['message'])) {
+                // If there's an error message in the session, load login.php and show the toast message
+                echo "$(\"#content\").load(\"landingpage.html\", loadProducts);";
+                echo "showToast('" . $_SESSION["message"] . "');";
+                unset($_SESSION["message"]);
+            }{
+                // If there's no error message, load the landingpage.html and call the loadProducts() function
+                echo "$(\"#content\").load(\"landingpage.html\", loadProducts);";
+            }
+            
+            ?>
         });
     </script>
 </body>
