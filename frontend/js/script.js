@@ -586,3 +586,43 @@ function checkLogin() {
   console.log("Finished Checking Login...");
 }
 
+function registerUser() {
+  console.log("Registering...");
+  
+  var username = $('#username').val();
+  var email = $('#email').val();
+  var password = $('#password').val();
+  var password2 = $('#password2').val();
+  var address = $('#address').val();
+  var city = $('#city').val();
+  var zip = $('#zip').val();
+  var country = $('#country').val();
+  var phone = $('#phone').val();
+  var billingName = $('#billingName').val();
+
+  // Make the AJAX POST request to register the user
+  $.ajax({
+      url: '../../backend/logic/createUser.php',
+      method: 'POST',
+      data: { 
+        username: username,
+        email: email,
+        password: password,
+        password2: password2,
+        address: address,
+        city: city,
+        zip: zip,
+        country: country,
+        phone: phone,
+        billingName: billingName },
+      success: function(response) {
+          console.log(response);
+      },
+      error: function(xhr, status, error) {
+          console.log(error);
+          console.log(status);
+      }
+  });
+  console.log("Finished Registering...");
+}
+
