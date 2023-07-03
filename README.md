@@ -10,3 +10,5 @@ GRANT ALL PRIVILEGES ON `fechtoutlet`.* TO 'fechtoutlet'@'localhost';
 Github Link: https://github.com/erichaneder/WEBEN-Projekt
 
 Auszug der DB befindet sich in backend/db/fechtoutlet.sql
+
+Trollo Link (zu unserem Kanban Board) https://trello.com/b/EEad5QXu/weben
