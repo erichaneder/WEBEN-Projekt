@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the submitted form data
     $userId = $_SESSION['user']; // Assuming you have the user ID stored in the session
     $username = $_POST['username'];
-    $address = $_POST['adress'];
+    $adress = $_POST['adress'];
     $city = $_POST['city'];
     $zip = $_POST['zip'];
     $country = $_POST['country'];

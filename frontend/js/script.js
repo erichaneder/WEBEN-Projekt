@@ -536,25 +536,28 @@ function loadProfile(userid) {
           // Clear the profileData div to remove any existing data
           profileData.empty();
 
-          // Populate the profileData div with the user's account data
-          profileData.append('<p>Name: ' + response.user_name + '</p>');
-          profileData.append('<p>Email: ' + response.user_mail + '</p>');
-          profileData.append('<form id="editProfileForm" action="../../backend/logic/updateUser.php" method="POST">');
-          profileData.append('<input type="hidden" name="userid" value="' + userid + '">');
-          profileData.append('<label for="username">Name:</label><br>');
-          profileData.append('<input type="text" id="username" name="username" value="' + response.user_name + '"><br>');
-          profileData.append('<label for="phone">Phone:</label><br>');
-          profileData.append('<input type="text" id="phone" name="phone" value="' + response.user_phone + '"><br>');
-          profileData.append('<label for="adress">Address:</label><br>');
-          profileData.append('<input type="text" id="adress" name="adress" value="' + response.user_address + '"><br>');
-          profileData.append('<label for="zip">Zip:</label><br>');
-          profileData.append('<input type="text" id="zip" name="zip" value="' + response.user_zipcode + '"><br>');
-          profileData.append('<label for="city">City:</label><br>');
-          profileData.append('<input type="text" id="city" name="city" value="' + response.user_city + '"><br>');
-          profileData.append('<label for="country">Country:</label><br>');
-          profileData.append('<input type="text" id="country" name="country" value="' + response.user_country + '"><br>');
-          profileData.append('<input type="submit" value="Update Profile"><br>');
-          profileData.append('</form>');
+          // Generate the HTML code for the profile form
+          var formHTML = '<p>Name: ' + response.user_name + '</p>';
+          formHTML += '<p>Email: ' + response.user_mail + '</p>';
+          formHTML += '<form id="editProfileForm" action="../../backend/logic/updateUser.php" method="POST">';
+          formHTML += '<input type="hidden" name="userid" value="' + userid + '">';
+          formHTML += '<label for="username">Name:</label><br>';
+          formHTML += '<input type="text" id="username" name="username" value="' + response.user_name + '"><br>';
+          formHTML += '<label for="phone">Phone:</label><br>';
+          formHTML += '<input type="text" id="phone" name="phone" value="' + response.user_phone + '"><br>';
+          formHTML += '<label for="address">Adress:</label><br>';
+          formHTML += '<input type="text" id="adress" name="adress" value="' + response.user_adress + '"><br>';
+          formHTML += '<label for="zip">Zip:</label><br>';
+          formHTML += '<input type="text" id="zip" name="zip" value="' + response.user_zipcode + '"><br>';
+          formHTML += '<label for="city">City:</label><br>';
+          formHTML += '<input type="text" id="city" name="city" value="' + response.user_city + '"><br>';
+          formHTML += '<label for="country">Country:</label><br>';
+          formHTML += '<input type="text" id="country" name="country" value="' + response.user_country + '"><br>';
+          formHTML += '<input type="submit" value="Update Profile"><br>';
+          formHTML += '</form>';
+
+          // Append the form HTML to the profileData div
+          profileData.append(formHTML);
       },
       error: function (xhr, status, error) {
           // Handle the error response
@@ -563,3 +566,4 @@ function loadProfile(userid) {
       }
   });
 }
+
