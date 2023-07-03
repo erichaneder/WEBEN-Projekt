@@ -7,8 +7,13 @@ if($conn->connect_error) {
     exit();
 }
 
-// Retrieve all products
+$category = $_GET['category'];
+
+// Retrieve all products, filter for category if there is one selected
 $sql = "SELECT * FROM articles";
+if ($category != '0') {
+    $sql .= " WHERE category = '" . $category . "'";
+}
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

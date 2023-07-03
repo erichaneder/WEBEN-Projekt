@@ -168,9 +168,18 @@ function loadContent(page) {
 
   function loadProducts() {
     console.log("Loading Products...");
+
+    // Get the selected category value
+    var selectedCategory = $('#country').val();
+    console.log("Selected Category: " +selectedCategory)
+    if(selectedCategory !== "1" && selectedCategory !== "2" && selectedCategory !== "3") {
+      selectedCategory = 0;
+      console.log("Loading with category 0!");
+    }
+
     // Make the AJAX GET request to retrieve products
     $.ajax({
-      url: '../../backend/logic/getProducts.php',
+      url: '../../backend/logic/getProducts.php?category='+ selectedCategory,
       method: 'GET',
       dataType: 'json',
       success: function(response) {
@@ -240,12 +249,20 @@ function handleSearch(event) {
   var searchTerm = event.target.value;
   console.log("Searchterm: "+ searchTerm);
 
+  // Get the selected category value
+  var selectedCategory = $('#country').val();
+  console.log("Selected Category: " +selectedCategory)
+  if(selectedCategory !== "1" && selectedCategory !== "2" && selectedCategory !== "3") {
+    selectedCategory = 0;
+    console.log("Loading with category 0!");
+  }
+
   // Sende AJAX-Anfrage an den Server
   $.ajax({
     url: '../../backend/logic/search.php', 
     type: 'POST',
     dataType: 'json',
-    data: { searchTerm: searchTerm }, // Übergib den Suchbegriff an den Server
+    data: { searchTerm: searchTerm, category: selectedCategory }, // Übergib den Suchbegriff an den Server
     success: function(response) {
       var productsDIV = $('.products');
       // Leere den Inhalt der .products-DIV

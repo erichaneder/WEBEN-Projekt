@@ -9,9 +9,13 @@ if($conn->connect_error) {
 
 // Hole den Suchbegriff aus der POST-Anfrage
 $searchTerm = $_POST['searchTerm'];
+$category = $_POST['category'];
 
 // Führe die Produktsuche in der Datenbank durch
 $sql = "SELECT * FROM articles WHERE name LIKE '%$searchTerm%'";
+if ($category != '0') {
+    $sql .= " AND category = '" . $category . "'";
+}
 $result = $conn->query($sql);
 
 $products = array();
