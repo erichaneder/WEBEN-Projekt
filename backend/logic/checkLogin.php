@@ -32,17 +32,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $users = $result->fetch_assoc();
         $dbpw = $users['user_password'];
+
         //verify password
         if(password_verify($password, $dbpw)) {
             $userid = $users['user_id'];
         } else {
             $_SESSION['error_message_login'] = "Zugangsdaten oder Passwort inkorrekt!";
+            $conn->close();
             header('Location: ../../frontend/sites/index.php');
             exit();
         }
     } else {
         // error handling, no user found for these credentials
         $_SESSION['error_message_login'] = "Zugangsdaten oder Passwort inkorrekt!";
+        $conn->close();
         header('Location: ../../frontend/sites/index.php');
         exit();
     }
@@ -51,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Redirect to the desired page after successful login
     $_SESSION['message'] = "Herzlich willkommen";
+    $conn->close();
     header('Location: ../../frontend/sites/index.php');
     exit();
 }
