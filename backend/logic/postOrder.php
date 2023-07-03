@@ -4,9 +4,7 @@ require_once('../config/dbaccess.php');
 // Retrieve the order data from the AJAX request
 $orderData = $_POST['products'];
 
-// Perform necessary validation and processing of the order data
-
-// Example: Store the order data in the database
+// Store the order data in the database
 $conn = new mysqli($host, $user, $dbpassword, $database);
 if ($conn->connect_error) {
     echo "Connection Error: " . $conn->connect_error;

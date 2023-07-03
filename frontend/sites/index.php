@@ -3,13 +3,6 @@
 
 <?php
 session_start();
-
-if(isset($_SESSION['user'])) {
-    echo "Eingeloggter User: " . $_SESSION['user'];
-} else {
-    echo "Kein User eingeloggt.";
-}   
-
 ?>
 
 <head>

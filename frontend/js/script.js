@@ -98,26 +98,6 @@ function loadContent(page) {
     console.log("Finished Handling active tab for: "+tab);
   }
 
-  function deactivateCustomer() {
-    //send put request to set the status of a user to deactivated
-    $.ajax({
-      type: "PUT",
-      dataType: "json",
-      data: {
-        email: "john.doe@gmail.com"
-      },
-      url: "../../backend/logic/deactivateCustomer.php",
-      success: function(response) {
-        // do something
-        console.log(response);
-      },
-      error: function(xhr, ajaxOptions, thrownError) {
-        //handle error
-        console.error(xhr);
-      }
-    });
-  }
-
   function loadCustomers() {
     console.log("Loading Users...");
     // Make the AJAX GET request to retrieve customers
@@ -248,8 +228,6 @@ function loadContent(page) {
         $('#price').text('€' + price.toFixed(2));
         $('#productpicture').prop('src', path);
         
-        
-
       });
     });
   }
@@ -508,10 +486,10 @@ function loadOrders(userid) {
           row.append($('<td>').text(order.order_date));
           row.append($('<td>').text(order.product_name));
           row.append($('<td>').text(order.quantity));
-          row.append($('<td>').text(order.total_cost+" €"));
+          row.append($('<td>').text(order.total_cost*order.quantity+" €"));
           
           orderList.append(row);
-          totalCost += parseFloat(order.total_cost); //add to total cost
+          totalCost += parseFloat(order.total_cost*order.quantity); //add to total cost
         });
 
         // Add the total cost row
@@ -582,7 +560,7 @@ function checkLogin() {
   console.log("Checking Login...");
 
   email = $("#exampleInputEmail1").val();
-  password = $("#exampleInputPassword1").val(); //problem
+  password = $("#exampleInputPassword1").val();
   remember = $("#rememberCheckbox").val();
 
   console.log("Email: "+email);

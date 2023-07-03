@@ -17,7 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once('../config/dbaccess.php');
     $conn = new mysqli($host, $user, $dbpassword, $database);
     if($conn->connect_error) {
-        echo "Connection Error: " . $conn->connect_error;
+        $_SESSION['error_message_login'] = "Serverfehler!";
+        $conn->close();
+        header('Location: ../../frontend/sites/index.php');
         exit();
     
     }
@@ -25,8 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //checken ob das pw gleich dem gehashten aus der db ist
     $hashpw = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "SELECT * FROM users where user_mail = '" . $email . "'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM users WHERE user_mail = ?";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
                 
     if ($result->num_rows > 0) {
 

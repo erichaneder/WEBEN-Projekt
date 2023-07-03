@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 03. Jul 2023 um 13:45
+-- Erstellungszeit: 03. Jul 2023 um 18:24
 -- Server-Version: 10.4.24-MariaDB
 -- PHP-Version: 8.1.6
 
@@ -43,15 +43,15 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`article_id`, `article_sizes`, `article_price`, `article_attributes`, `article_picturepath`, `name`, `description`, `category`) VALUES
-(2, 1, 10, 'qwqeqew', '../res/img/fechthelm.png', 'Fechthelm', 'Die Fechtmaske schützt den Kopf und das Gesicht des Fechters vor Verletzungen.', 1),
-(3, 1, 10, '2313123', '../res/img/fechtjacke1.png', 'Fechtjacke', 'Die Fechtjacke ist eine spezielle Schutzbekleidung für Fechter.', 1),
-(4, 1, 10, '1232112', '../res/img/fechthose1.png', 'Fechthose', 'Die Fechthose ist eine spezielle Hose, die den Fechter vor Verletzungen schützt.', 1),
-(5, 1, 1, '345353', '../res/img/saebel1.png', 'Fechtsäbel', 'Der Säbel ist eine Fechtwaffe mit gebogener Klinge und scharfer Schneide.', 2),
-(6, 1, 1, 'asdada', '../res/img/schaumstoff1.png', 'Schaumstoff-Säbel', 'Der Schaumstoff-Säbel ist eine sichere und spaßige Alternative zum klassischen Fechtsäbel.', 2),
-(7, 1, 1, 'ewerwwwsdw', '../res/img/shirt1.png', 'Funktionsshirt', 'Das atmungsaktive Funktionsshirt sorgt durch seine hohe Funktionalität für ein angenehmes Tragegefühl.', 1),
-(8, 1, 1, 'sdsdads', '../res/img/handschuh1.png', 'Handschuhe', 'Fechthandschuhe schützen deine Hände vor Verletzungen und bieten ein besseres Griffgefühl.', 1),
-(9, 1, 44, 'sadasdads', '../res/img/socken1.png', 'Fechtsocken', 'Fechtsocken sind spezielle Socken, die einen sicheren Halt im Fechtschuh gewährleisten.', 1),
-(10, 1, 1, 'sdasasda', '../res/img/tasche1.png', 'Tasche', 'Die geräumige Fechttasche bietet genug Platz für all dein Equipment.', 3);
+(2, 1, 200, 'qwqeqew', '../res/img/fechthelm.png', 'Fechthelm', 'Die Fechtmaske schützt den Kopf und das Gesicht des Fechters vor Verletzungen.', 1),
+(3, 1, 220, '2313123', '../res/img/fechtjacke1.png', 'Fechtjacke', 'Die Fechtjacke ist eine spezielle Schutzbekleidung für Fechter.', 1),
+(4, 1, 120, '1232112', '../res/img/fechthose1.png', 'Fechthose', 'Die Fechthose ist eine spezielle Hose, die den Fechter vor Verletzungen schützt.', 1),
+(5, 1, 189, '345353', '../res/img/saebel1.png', 'Fechtsäbel', 'Der Säbel ist eine Fechtwaffe mit gebogener Klinge und scharfer Schneide.', 2),
+(6, 1, 10, 'asdada', '../res/img/schaumstoff1.png', 'Schaumstoff-Säbel', 'Der Schaumstoff-Säbel ist eine sichere und spaßige Alternative zum klassischen Fechtsäbel.', 2),
+(7, 1, 30, 'ewerwwwsdw', '../res/img/shirt1.png', 'Funktionsshirt', 'Das atmungsaktive Funktionsshirt sorgt durch seine hohe Funktionalität für ein angenehmes Tragegefühl.', 1),
+(8, 1, 45, 'sdsdads', '../res/img/handschuh1.png', 'Handschuhe', 'Fechthandschuhe schützen deine Hände vor Verletzungen und bieten ein besseres Griffgefühl.', 1),
+(9, 1, 10, 'sadasdads', '../res/img/socken1.png', 'Fechtsocken', 'Fechtsocken sind spezielle Socken, die einen sicheren Halt im Fechtschuh gewährleisten.', 1),
+(10, 1, 60, 'sdasasda', '../res/img/tasche1.png', 'Tasche', 'Die geräumige Fechttasche bietet genug Platz für all dein Equipment.', 3);
 
 -- --------------------------------------------------------
 
@@ -73,18 +73,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customer_id`, `order_date`, `total_cost`, `product_name`, `quantity`) VALUES
-(1, 1, '2023-06-15', 112, '', 0),
-(2, 1, '2023-06-16', 23.5, '', 0),
-(3, 2, '2023-06-15', 112.2, '', 0),
-(4, 2, '2023-06-16', 23, '', 0),
-(5, 1, '2023-06-29', 10, 'Fechthelm', 1),
-(6, 1, '2023-07-01', 1, 'Fechtsäbel', 1),
-(7, 1, '2023-07-01', 1, 'Fechtsäbel', 1),
-(8, 1, '2023-07-01', 10, 'Fechthelm', 3),
-(9, 1, '2023-07-02', 10, 'Fechthelm', 1),
-(10, 1, '2023-07-02', 10, 'Fechthelm', 1),
-(11, 1, '2023-07-02', 10, 'Fechtjacke', 1),
-(12, 4, '2023-07-02', 10, 'Fechthelm', 1);
+(16, 5, '2023-07-03', 220, 'Fechtjacke', 1),
+(17, 5, '2023-07-03', 200, 'Fechthelm', 1),
+(18, 5, '2023-07-03', 189, 'Fechtsäbel', 1);
 
 -- --------------------------------------------------------
 
@@ -112,10 +103,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_mail`, `user_role`, `user_status`, `user_phone`, `user_adress`, `user_zipcode`, `user_city`, `user_billingname`, `user_country`) VALUES
-(1, 'outlet_admin', '1234', 'wi22b038@technikum-wien.at', 1, 1, '0664/6271166', 'Haasgasse 7', '2120', 'Wolkersdorf', 'Haas David', 'Österreich'),
-(2, 'Ben Benson', '1234', 'ben.benson@gmail.com', 1, 1, '231321313', 'Bahnstraße 12', '2013', 'Hollabrunn', 'Ben Benson', 'Austria'),
-(3, 'TestUser', '1', '1@1', 0, 1, '1234456', 'LostStrasse 1', '2020', 'Hollabrunn', 'Test Testhawara', 'Austria'),
-(4, 'Benson', '$2y$10$DLfBd5fId7wzm8mAv6gK1.AW0DuBc5JB1OjDBE4CfFhHUJLUQ7AE2', 'benson@123', 0, 1, '123', '123', '123', '123', 'Benson', 'AUT');
+(5, 'Eric Haneder', '$2y$10$oGL5uI8TtAIaqpqjbeYfSeUx6H6aXzhR9kbN.AKCcXOz.wDMHJ8he', 'eric.haneder@a1.net', 0, 1, '1234565', 'Baumstraße 10', '2020', 'Hollabrunn', 'Eric Haneder', 'AUT'),
+(6, 'Admin', '$2y$10$b9eZpKm8Bd8gBZerjHZSFenOz2jkz6eTNA5KIICfE05U3hXkxYsAG', 'admin@fechtoutlet.at', 1, 1, '1312313', 'Bachgasse 7', '2000', 'Stockerau', 'Admin User', 'AUT');
 
 --
 -- Indizes der exportierten Tabellen
@@ -153,13 +142,13 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT für Tabelle `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
