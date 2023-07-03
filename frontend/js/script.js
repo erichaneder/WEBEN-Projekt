@@ -65,7 +65,7 @@ function loadContent(page) {
           handleActiveTab('register');
         } else if(page === 'profil.html') {
           handleActiveTab('profil');
-          loadProfile(2);
+          loadProfile(userid);
         }
       });
     });
@@ -525,34 +525,41 @@ function loadOrders(userid) {
 }
 
 function loadProfile(userid) {
-      // Make an AJAX request to fetch the user's profile data
-      $.ajax({
-        url: '../../backend/logic/getProfile.php?userid=' + userid, 
-        method: 'GET',
-        dataType: 'json',
-        success: function(response) {
-            // Handle the success response
-            var profileData = $('#profileData');
-            // Populate the profileData div with the user's account data
-            profileData.append('<p>Name: ' + response.user_name + '</p>');
-            profileData.append('<p>Email: ' + response.user_mail + '</p>');
-            profileData.append('<p>Phone: ' + response.user_phone + '</p>');
-            profileData.append('<p>Adress: ' + response.user_adress + '</p>');
-            profileData.append('<p>Zip: ' + response.user_zipcode + '</p>');
-            profileData.append('<p>City: ' + response.user_city + '</p>');
-            profileData.append('<p>Country: ' + response.user_country + '</p>');
-            // Add more fields as per your requirements
-        },
-        error: function(xhr, status, error) {
-            // Handle the error response
-            console.error(error);
-            // Display an error message or take other actions as needed
-        }
-    });
+  // Make an AJAX request to fetch the user's profile data
+  $.ajax({
+      url: '../../backend/logic/getProfile.php?userid=' + userid,
+      method: 'GET',
+      dataType: 'json',
+      success: function (response) {
+          // Handle the success response
+          var profileData = $('#profileData');
+          // Clear the profileData div to remove any existing data
+          profileData.empty();
+
+          // Populate the profileData div with the user's account data
+          profileData.append('<p>Name: ' + response.user_name + '</p>');
+          profileData.append('<p>Email: ' + response.user_mail + '</p>');
+          profileData.append('<form id="editProfileForm" action="../../backend/logic/updateUser.php" method="POST">');
+          profileData.append('<input type="hidden" name="userid" value="' + userid + '">');
+          profileData.append('<label for="username">Name:</label><br>');
+          profileData.append('<input type="text" id="username" name="username" value="' + response.user_name + '"><br>');
+          profileData.append('<label for="phone">Phone:</label><br>');
+          profileData.append('<input type="text" id="phone" name="phone" value="' + response.user_phone + '"><br>');
+          profileData.append('<label for="adress">Address:</label><br>');
+          profileData.append('<input type="text" id="adress" name="adress" value="' + response.user_address + '"><br>');
+          profileData.append('<label for="zip">Zip:</label><br>');
+          profileData.append('<input type="text" id="zip" name="zip" value="' + response.user_zipcode + '"><br>');
+          profileData.append('<label for="city">City:</label><br>');
+          profileData.append('<input type="text" id="city" name="city" value="' + response.user_city + '"><br>');
+          profileData.append('<label for="country">Country:</label><br>');
+          profileData.append('<input type="text" id="country" name="country" value="' + response.user_country + '"><br>');
+          profileData.append('<input type="submit" value="Update Profile"><br>');
+          profileData.append('</form>');
+      },
+      error: function (xhr, status, error) {
+          // Handle the error response
+          console.error(error);
+          // Display an error message or take other actions as needed
+      }
+  });
 }
-
-
-
-
-
-  

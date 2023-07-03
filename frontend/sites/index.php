@@ -63,7 +63,7 @@ if(isset($_SESSION['user'])) {
                 echo "$(\"#content\").load(\"register.html\", function() {";
                 echo "showToast('" . $_SESSION["error_message_register"] . "');";
                 echo "});";
-                unset($_SESSION["error_message_login"]);
+                unset($_SESSION["error_message_register"]);
             } else if (isset($_SESSION['message'])) {
                 // Successful login
                 echo "$(\"#content\").load(\"landingpage.html\", loadProducts);";
