@@ -53,18 +53,24 @@ if(isset($_SESSION['user'])) {
             $("#navigation").load("nav.php");
             <?php 
             if (isset($_SESSION['error_message_login'])) {
-                // If there's an error message in the session, load login.php and show the toast message
+                // Error in login
                 echo "$(\"#content\").load(\"login.php\", function() {";
                 echo "showToast('" . $_SESSION["error_message_login"] . "');";
                 echo "});";
                 unset($_SESSION["error_message_login"]);
-            } else  if (isset($_SESSION['message'])) {
-                // If there's an error message in the session, load login.php and show the toast message
+            } else if (isset($_SESSION['error_message_register'])) {
+                // Error in Registration
+                echo "$(\"#content\").load(\"register.html\", function() {";
+                echo "showToast('" . $_SESSION["error_message_register"] . "');";
+                echo "});";
+                unset($_SESSION["error_message_login"]);
+            } else if (isset($_SESSION['message'])) {
+                // Successful login
                 echo "$(\"#content\").load(\"landingpage.html\", loadProducts);";
                 echo "showToast('" . $_SESSION["message"] . "');";
                 unset($_SESSION["message"]);
-            }{
-                // If there's no error message, load the landingpage.html and call the loadProducts() function
+            } else {
+                // Normal pageload
                 echo "$(\"#content\").load(\"landingpage.html\", loadProducts);";
             }
             

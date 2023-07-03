@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the submitted form data
@@ -28,7 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Perform form validation
     if ($password !== $password2) {
         // Passwords do not match, handle the error
-        echo "Passwords do not match!";
+        $_SESSION['error_message_register'] = "Passwörter stimmen nicht überein!";
+        header('Location: ../../frontend/sites/index.php');
         exit();
     }
 
@@ -37,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "Email already in use";
+        $_SESSION['error_message_register'] = "Mailadresse bereits in verwendeung";
+        header('Location: ../../frontend/sites/index.php');
         exit();
     }
 
@@ -66,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user'] = $userId;
     
         // Redirect to the desired page after successful login (checkLogin.php in this case)
+        $_SESSION['message'] = "Herzlich willkommen";
         header('Location: ../../frontend/sites/index.php');
         exit();
     } else {
