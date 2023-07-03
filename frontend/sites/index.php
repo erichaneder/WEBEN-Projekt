@@ -9,6 +9,7 @@ if(isset($_SESSION['user'])) {
 } else {
     echo "Kein User eingeloggt.";
 }   
+
 ?>
 
 <head>

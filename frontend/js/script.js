@@ -169,6 +169,17 @@ function loadContent(page) {
   function loadProducts() {
     console.log("Loading Products...");
 
+    // Check if there is a cart saved, if yes retrieve it here
+    var storedCart = sessionStorage.getItem('cart');
+    console.log("Checking cart..." + storedCart + "Old length: " + cart.length);
+    if (storedCart != null && cart.length < 1) {
+        cart = JSON.parse(storedCart);
+        // Optional: Clear the stored cart data from session storage
+        sessionStorage.removeItem('cart');
+        // update cart count
+        $('#cartCount').text("" + cart.length); 
+    }
+
     // Get the selected category value
     var selectedCategory = $('#country').val();
     console.log("Selected Category: " +selectedCategory)
@@ -565,5 +576,35 @@ function loadProfile(userid) {
           // Display an error message or take other actions as needed
       }
   });
+}
+
+function checkLogin() {
+  console.log("Checking Login...");
+
+  email = $("#exampleInputEmail1").val();
+  password = $("#exampleInputPassword1").val(); //problem
+  remember = $("#rememberCheckbox").val();
+
+  console.log("Email: "+email);
+  console.log("PW: "+password);
+  console.log("Remember: "+remember);
+
+  // Before the AJAX request in the checkLogin() function
+  sessionStorage.setItem('cart', JSON.stringify(cart));
+
+  // Make the AJAX POST request to check the login
+  $.ajax({
+      url: '../../backend/logic/checkLogin.php',
+      method: 'POST',
+      data: { email: email, password: password, remember: remember },
+      success: function(response) {
+          console.log(response);
+      },
+      error: function(xhr, status, error) {
+          console.log(error);
+          console.log(status);
+      }
+  });
+  console.log("Finished Checking Login...");
 }
 

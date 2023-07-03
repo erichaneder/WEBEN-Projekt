@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <form class method="post" action="../../backend/logic/checkLogin.php">
+    <form class method="post">
         <div class="row justify-content-center">
             <div class="col-md-3 text-center">
                 <div class="form-group">
@@ -30,7 +30,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-3 text-center">
-                <button type="submit" class="btn btn-primary" >Submit</button>
+                <button type="submit" class="btn btn-primary" onclick="checkLogin()">Submit</button>
             </div>
         </div> 
     </form>
