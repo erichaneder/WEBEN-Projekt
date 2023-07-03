@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['user'] = $userid; //userid von der db setzen
 
     // Redirect to the desired page after successful login
-    $_SESSION['message'] = "Herzlich willkommen ". $_POST['remember'];
+    $_SESSION['message'] = "Herzlich willkommen ";
     $conn->close();
     header('Location: ../../frontend/sites/index.php');
     exit();
