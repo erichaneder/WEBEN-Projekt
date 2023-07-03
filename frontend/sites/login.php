@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-3 text-center">
                 <div class="form-group">
-                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required value="<?php echo isset($_COOKIE['remembered_email']) ? $_COOKIE['remembered_email'] : ''; ?>">
                 </div>
             </div>
         </div>
@@ -12,6 +12,14 @@
             <div class="col-md-3 text-center">
                 <div class="form-group">
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3 text-center">
+                <div class="form-group form-check">
+                    <input type="checkbox" name="remember" class="form-check-input" id="rememberCheckbox">
+                    <label class="form-check-label" for="rememberCheckbox">Remember me</label>
                 </div>
             </div>
         </div>

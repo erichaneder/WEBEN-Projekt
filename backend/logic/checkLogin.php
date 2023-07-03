@@ -3,6 +3,13 @@ session_start();
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the "Remember me" checkbox is selected
+    if (isset($_POST['remember']) && $_POST['remember'] == 'on') {
+        // Set a cookie with the email value
+        $email = $_POST['email'];
+        setcookie('remembered_email', $email, time() + (86400 * 365), '/'); // Cookie expires in 365 days
+    }
+
     // Retrieve the submitted email and password
     $email = $_POST['email'];
     $password = $_POST['password'];

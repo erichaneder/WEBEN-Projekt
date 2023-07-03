@@ -44,7 +44,7 @@ function loadContent(page) {
           handleActiveTab('about');
         } else if(page === 'produktbearbeitung.html') {
           handleActiveTab('addProducts');
-        } else if(page === 'login.html') {
+        } else if(page === 'login.php') {
           handleActiveTab('login');
         } else if(page === 'register.html') {
           handleActiveTab('register');

@@ -18,7 +18,7 @@
         if(isset($_SESSION["user"])) {
             echo '<button id="btnCheckout" class="btn btn-primary" onclick="orderBasket('.$_SESSION["user"].')">Warenkorb bestellen</button>';
         }else{
-            echo '<button id="checkOudLogin" class="btn btn-primary" onclick="loadContent(\'login.html\')">Zum Bestellen anmelden</button>';
+            echo '<button id="checkOudLogin" class="btn btn-primary" onclick="loadContent(\'login.php\')">Zum Bestellen anmelden</button>';
         }
         ?>
     </div>

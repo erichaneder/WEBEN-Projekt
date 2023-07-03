@@ -66,7 +66,7 @@
           <a class="nav-link py-3 px-0 px-lg-2" href="#" onclick="loadContent(\'register.html\')">REGISTER</a>
         </li>
         <li class="nav-item col-6 col-lg-auto login">
-          <a class="nav-link py-3 px-0 px-lg-2" href="#" onclick="loadContent(\'login.html\')">LOGIN</a>
+          <a class="nav-link py-3 px-0 px-lg-2" href="#" onclick="loadContent(\'login.php\')">LOGIN</a>
         </li>';
         }
       ?>
