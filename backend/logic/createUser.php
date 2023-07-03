@@ -68,19 +68,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_start();
         // Store the user ID in the session
         $_SESSION['user'] = $userId;
-    
+        
+        // Close the database connection
+        $stmt->close();
+        $conn->close();
+
         // Redirect to the desired page after successful login (checkLogin.php in this case)
         $_SESSION['message'] = "Herzlich willkommen";
         header('Location: ../../frontend/sites/index.php');
         exit();
     } else {
+        // Close the database connection
+        $stmt->close();
+        $conn->close();
         // Failed to insert the user, handle the error accordingly
         echo "User registration failed!";
         exit();
     }
 
-    // Close the database connection
-    $stmt->close();
-    $conn->close();
+    
 }
 ?>

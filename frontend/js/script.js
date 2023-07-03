@@ -412,7 +412,7 @@ function orderBasket(userid) {
     });  
 
   cart = [];
-  loadContent('orders.html', userid);
+  loadUserContent('orders.html', userid);
 }
 
 function removeProductFromCart(index) {
