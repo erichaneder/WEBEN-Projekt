@@ -23,6 +23,21 @@
 <div class="container products">
     
 </div>
+
+
+<div id="chatPopup" class="collapsed">
+    <div class="chatHeader" onclick="toggleChat()">
+        Chat <span id="arrowIcon">&#9660;</span>
+      </div>
+    <div id="chatMessages">
+        <!-- Chat messages will be displayed here -->
+    </div>
+    <div id="chatInput">
+        <input type="text" id="messageInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter') sendMessage()">
+        <button id="sendButton" onclick="sendMessage()">Send</button>
+    </div>
+</div>
+  
 <br>
 <br>
 <br>

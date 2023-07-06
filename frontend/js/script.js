@@ -626,3 +626,88 @@ function registerUser() {
   console.log("Finished Registering...");
 }
 
+// Function to handle sending a message
+function sendMessage() {
+  console.log("Sending message...");
+  var messageInput = document.getElementById('messageInput');
+  var message = messageInput.value.trim(); // Remove leading/trailing whitespace
+
+  if (message === '') {
+    return;
+  }
+  // Create a new message element
+  var messageElement = $('<div>').addClass('message').text(message);
+
+  // Prepend the new message to the chatMessages div
+  $('#chatMessages').append(messageElement);
+
+  // Scroll to the bottom of the chat messages container
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  // Clear the message input field
+  messageInput.value = '';
+
+  // Prepare the data to be sent in the AJAX request
+  var data = {
+    userid: 5,   //HARDCODED
+    content: message,
+    date: new Date().toISOString()
+  };
+
+  $.ajax({
+    url: '../../backend/logic/saveMessage.php', 
+    method: 'POST',
+    data: data,
+    success: function(response) {
+      console.log(response);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+  
+function toggleChat() {
+  var chatPopup = document.getElementById('chatPopup');
+  var arrowIcon = document.getElementById('arrowIcon'); 
+  chatPopup.classList.toggle('collapsed');
+  if(chatPopup.classList.contains('collapsed')) {
+    arrowIcon.innerHTML = '&#9650;';
+  } else {
+    arrowIcon.innerHTML = '&#9660;'
+    $('#chatMessages').empty(); // Clear existing messages
+    loadPreviousMessages();
+  }
+}
+
+function loadPreviousMessages() {
+  // Make an AJAX GET request to retrieve the previous messages
+  $.ajax({
+    url: '../../backend/logic/getMessages.php',
+    method: 'GET',
+    dataType: 'json',
+    success: function(response) {
+      // Handle the response data and populate the chat messages container
+      var chatMessages = $('#chatMessages');
+      chatMessages.empty(); // Clear existing messages
+
+      // Loop through the messages and create message elements
+      for (var i = 0; i < response.length; i++) {
+        var message = response[i];
+        var messageElement = $('<div>', {
+          class: 'message' + (message.admin ? ' admin' : ''),
+          text: message.content
+        });
+        chatMessages.append(messageElement); // Prepend new message to show it at the top
+      }
+    },
+    error: function(xhr, status, error) {
+      // Handle the error case
+      console.log(error);
+      console.log(status);
+    }
+  });
+}
+
+
+
